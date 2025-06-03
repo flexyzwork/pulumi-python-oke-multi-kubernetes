@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-prod
+  namespace: default
+  labels:
+    app: nginx
+  annotations:
+    acme.cert-manager.io/http01-ingress-class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/proxy-body-size: 999m # 동영상 파일 업로드시 413 에러가 발생하여 추가
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: se.code-lab.kr
+      http:
+        paths:
+          - backend:
+              service:
+                name: nginx
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - se.code-lab.kr
+      secretName: nginx-prod-tls

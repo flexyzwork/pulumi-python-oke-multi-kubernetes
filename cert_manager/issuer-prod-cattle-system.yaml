@@ -1,0 +1,16 @@
+# 적용할 필요 없음
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: letsencrypt-prod-is
+  namespace: cattle-system # 특정 네임스페이스에서만 동작
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: master@code-lab.kr
+    privateKeySecretRef:
+      name: letsencrypt-prod-is-tls
+    solvers:
+      - http01:
+          ingress:
+            class: nginx

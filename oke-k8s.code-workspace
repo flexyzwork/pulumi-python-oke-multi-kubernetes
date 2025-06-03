@@ -1,0 +1,51 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "python.analysis.typeCheckingMode": "basic",
+        "python.analysis.autoImportCompletions": true,
+        "[python]": {
+            "editor.defaultFormatter": "eeyore.yapf",
+            "editor.codeActionsOnSave": {
+                "source.organizeImports.ruff": "explicit"
+            }
+        },
+        "[json]": {
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "cSpell.words": [
+            "pulumi", "containerengine", "oke"
+        ],
+        "python.analysis.extraPaths": [
+            "./common"
+        ],
+        "editor.formatOnSave": true,
+        "html.format.enable": false,
+        "[html]": {
+            "editor.formatOnSave": false,
+            "editor.defaultFormatter": null
+        },
+        "emmet.includeLanguages": {
+            "django-html": "html"
+        },
+        "[django-html]": {
+            "editor.formatOnSave": false,
+            "editor.defaultFormatter": null
+        }
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-python.python",                // Python 지원
+            "eeyore.yapf",                     // Python 코드 포맷터
+            "esbenp.prettier-vscode",          // JSON 및 기타 형식 포맷터
+            "formulahendry.auto-close-tag",    // 자동 태그 닫기
+            "formulahendry.auto-rename-tag",   // 자동 태그 이름 변경
+            "editorconfig.editorconfig",       // EditorConfig 지원
+            "streetsidesoftware.code-spell-checker",  // 맞춤법 검사기
+            "charliermarsh.ruff"                // Ruff 코드 분석기
+        ]
+    }
+}
