@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import pulumi
 from pulumi_kubernetes.helm.v3 import Release, RepositoryOptsArgs
 
@@ -10,7 +9,6 @@ logger = global_logger
 
 @apply_exception_handler
 class IngressNginxManager(pulumi.ComponentResource):
-
     def __init__(self, name: str, compartment_id, public_ip_address, opts: pulumi.ResourceOptions):
         super().__init__('custom:network:IngressNginx', name, {}, opts)
         self.compartment_id = compartment_id
@@ -34,7 +32,7 @@ class IngressNginxManager(pulumi.ComponentResource):
                         'annotations': {
                             'oci.oraclecloud.com/load-balancer-type': 'nlb',
                             'oci-network-load-balancer.oraclecloud.com/security-list-management-mode': 'All',
-                            'oci.oraclecloud.com/health-checks-protocol': 'TCP'
+                            'oci.oraclecloud.com/health-checks-protocol': 'TCP',
                         },
                         'externalTrafficPolicy': 'Local',
                         'loadBalancerIP': self.public_ip_address,
@@ -42,7 +40,8 @@ class IngressNginxManager(pulumi.ComponentResource):
                 }
             },
             opts=pulumi.ResourceOptions.merge(
-                self.opts, pulumi.ResourceOptions(custom_timeouts=pulumi.CustomTimeouts(create='20m'))
-            )
+                self.opts,
+                pulumi.ResourceOptions(custom_timeouts=pulumi.CustomTimeouts(create='20m')),
+            ),
         )
         return ingress_nginx_release

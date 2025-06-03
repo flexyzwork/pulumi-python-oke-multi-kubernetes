@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os
 
 import pulumi
@@ -26,7 +25,10 @@ def main():
 
         pulumi.Output.all(region, compartment_id, public_ip_address, k8s_provider, oci_provider).apply(
             lambda args: create_ingress_nginx_release(
-                args[0], args[1], args[2], pulumi.ResourceOptions(providers=[args[3], args[4]])
+                args[0],
+                args[1],
+                args[2],
+                pulumi.ResourceOptions(providers=[args[3], args[4]]),
             )
         )
 
@@ -34,7 +36,10 @@ def main():
 def create_ingress_nginx_release(region, compartment_id, public_ip_address, opts):
     logger.info(f'Creating Ingress Nginx release for {region}')
     ingress_nginx_manager = IngressNginxManager(
-        f'{region}-ingress-nginx', compartment_id=compartment_id, public_ip_address=public_ip_address, opts=opts
+        f'{region}-ingress-nginx',
+        compartment_id=compartment_id,
+        public_ip_address=public_ip_address,
+        opts=opts,
     )
     ingress_nginx_release = ingress_nginx_manager.create_ingress_nginx()
 

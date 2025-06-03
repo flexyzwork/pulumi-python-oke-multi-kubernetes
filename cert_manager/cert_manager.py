@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import pulumi
 import pulumi_kubernetes as k8s
 from pulumi_kubernetes.helm.v3 import Release, RepositoryOptsArgs
@@ -12,7 +10,6 @@ logger = global_logger
 
 @apply_exception_handler
 class CertManager(pulumi.ComponentResource):
-
     def __init__(self, name: str, region: str, opts: pulumi.ResourceOptions):
         super().__init__('custom:tls:CertManager', name, {}, opts)
         self.name = name
@@ -33,7 +30,7 @@ class CertManager(pulumi.ComponentResource):
             values={'installCRDs': True},
             create_namespace=True,
             wait_for_jobs=True,
-            opts=self.opts
+            opts=self.opts,
         )
 
         logger.info('Applying cluster issuers')
@@ -43,7 +40,7 @@ class CertManager(pulumi.ComponentResource):
             'cluster-issuer-prod',
             file='cert_manager/cluster-issuer-prod.yaml',
             resource_prefix=f'{self.region}',
-            opts=pulumi.ResourceOptions.merge(self.opts, pulumi.ResourceOptions(depends_on=[cert_manager_release]))
+            opts=pulumi.ResourceOptions.merge(self.opts, pulumi.ResourceOptions(depends_on=[cert_manager_release])),
         )
 
         # cluster-issuer-staging.yaml 적용
@@ -51,7 +48,7 @@ class CertManager(pulumi.ComponentResource):
             'cluster-issuer-staging',
             file='cert_manager/cluster-issuer-staging.yaml',
             resource_prefix=f'{self.region}',
-            opts=pulumi.ResourceOptions.merge(self.opts, pulumi.ResourceOptions(depends_on=[cert_manager_release]))
+            opts=pulumi.ResourceOptions.merge(self.opts, pulumi.ResourceOptions(depends_on=[cert_manager_release])),
         )
 
         return cert_manager_release
