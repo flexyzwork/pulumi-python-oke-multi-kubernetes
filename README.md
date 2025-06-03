@@ -4,7 +4,7 @@ Oracle Cloud Infrastructure (OCI)의 Oracle Kubernetes Engine (OKE) 클러스터
 
 ## 📋 개요
 
-이 프로젝트는 [pulumi-python-oke-full](https://github.com/flexyzwork/pulumi-python-oke-full) 레포지토리의 infrastructure(pulumi계정/oke-infra/prod) 스택으로 생성된 OKE 클러스터 위에 필수 애플리케이션들을 배포합니다.
+이 프로젝트는 [pulumi-python-oke-full](https://github.com/flexyzwork/pulumi-python-oke-multi-infrastructure) 레포지토리의 infrastructure(pulumi계정/oke-infrastructure/prod) 스택으로 생성된 OKE 클러스터 위에 필수 애플리케이션들을 배포합니다.
 
 ### ✅ 제공하는 기능
 
@@ -26,8 +26,8 @@ Oracle Cloud Infrastructure (OCI)의 Oracle Kubernetes Engine (OKE) 클러스터
 
 ```bash
 # 기본 인프라 레포지토리 클론 및 배포
-git clone https://github.com/flexyzwork/pulumi-python-oke-infrastructure
-cd pulumi-python-oke-infrastructure
+git clone https://github.com/flexyzwork/pulumi-python-oke-multi-infrastructure
+cd pulumi-python-oke-multi-infrastructure
 # 해당 레포지토리의 README 따라 OKE 클러스터 생성
 ```
 
@@ -66,8 +66,8 @@ kubectl get nodes
 ### 1. 프로젝트 클론
 
 ```bash
-git clone https://github.com/flexyzwork/pulumi-python-oke-kubernetes
-cd pulumi-python-oke-kubernetes
+git clone https://github.com/flexyzwork/pulumi-python-oke-multi-kubernetes
+cd pulumi-python-oke-multi-kubernetes
 ```
 
 ### 2. Python 환경 설정
@@ -82,7 +82,7 @@ make install
 
 ```python
 # __main__.py 17번째 줄
-infra_stack = StackReference('pulumi계정/oke-infra/prod')
+infra_stack = StackReference('pulumi계정/oci-infrastructure/prod')
 ```
 
 사용 중인 실제 스택 이름으로 변경:
